@@ -3,8 +3,6 @@ session_start();
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$user = new \App\Models\User;
-var_dump($user);
 $app = new \Slim\App([
     'settings' => [
         'displayErrorDetails' => true,
@@ -26,5 +24,8 @@ $container['view'] = function ($container) {
     return $view;
 };
 
+$container['HomeController'] = function ($container) {
+    return new \App\Controllers\HomeController($container);
+};
 
 require __DIR . '/../app/routes.php';

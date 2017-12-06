@@ -1,2 +1,2 @@
 # slim-fit
-Slim-framework plyagroung for learning purposes.
+Slim-framework playground for learning purposes.

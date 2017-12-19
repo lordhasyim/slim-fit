@@ -10,7 +10,7 @@ use Respect\Validation\Validator as v;
 
 class AuthController extends Controller
 {
-
+    
   public function getSignIn($request, $response)
   {
       return $this->view->render($response, 'auth/signin.twig');
@@ -25,6 +25,7 @@ class AuthController extends Controller
       );
 
       if(!$auth){
+        $this->flash->addMessage('error', 'could not sign in with those details');
         return $response->withRedirect($this->router->pathFor('auth.signin'));
       }
 
@@ -55,7 +56,18 @@ class AuthController extends Controller
             'password' => password_hash($request->getParam('password'), PASSWORD_DEFAULT),
         ]);
 
+        $this->flash->addMessage('info', 'You have been signup!');
+
+        $this->auth->attempt($user->email, $request->getParam('password'));
+
         return $response->withRedirect($this->router->pathFor('home'));    
+   }
+
+   public function getSignOut($request, $response)
+   {
+        $this->auth->logout();
+
+        return $response->withRedirect($this->router->pathFor('home'));
    }
 
 }

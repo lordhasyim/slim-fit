@@ -8,11 +8,11 @@
     <title>Slim-auth Code Course</title>
 </head>
 <body>
-    <div class="constainer">
         {% include 'templates/partials/navigation.twig' %}
-        {% block content%}
+    <div class="container">
+        {% include 'templates/partials/flash.twig' %}
 
-        {% endblock content%}
+        {% block content%}{% endblock content%}
     </div>
 
 

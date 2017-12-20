@@ -42,12 +42,16 @@ $container['auth'] = function ($constainer) {
 $container['view'] = function ($container) {
     $view = new \Slim\Views\Twig(__DIR__ . '/../resources/views', [
         'cache' => false,
+
     ]);
 
     $view->addExtension(new \Slim\Views\TwigExtension(
         $container->router,
         $container->request->getUri()
     ));
+
+    //twig extension for debugging
+    $view->addExtension(new Twig_Extension_Debug());
 
     $view->getEnvironment()->addGlobal('auth', [
         // so the view can access auth.check and auth.user
